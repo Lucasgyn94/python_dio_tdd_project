@@ -24,7 +24,7 @@ async def clear_collections(mongo_client):
         if collection_name.startswith("system"):
             continue
 
-        #await mongo_client.get_database()[collection_name].delete_many({})
+        await mongo_client.get_database()[collection_name].delete_many({})
 
 @pytest.fixture
 def product_id() -> UUID:
@@ -39,4 +39,6 @@ def product_in(product_id):
 def product_up(product_id):
     return ProductUpdate(**product_data(), id=product_id)
 
-
+@pytest.fixture
+async def product_inserted(product_in):
+    return await product_usecase.create(body=product_in)
