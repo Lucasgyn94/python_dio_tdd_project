@@ -25,10 +25,12 @@ async def test_usecases_get_should_not_found():
 
     assert err.value.message == "Product not found with filter: 1e4f214e-85f7-461a-89d0-a751a32e3bb9"
 
+@pytest.mark.usefixtures("products_inserted")
 async def test_usecases_query_should_return_success():
     result = await product_usecase.query()
 
     assert isinstance(result, List)
+    assert len(result) > 1
 
 
 async def test_usecases_update_should_return_success(product_up, product_inserted):

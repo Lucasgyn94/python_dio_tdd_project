@@ -12,7 +12,6 @@ def test_schemas_validated():
     product = ProductIn.model_validate(data)
 
     assert product.name == "Samsung S20"
-    assert isinstance(product.id, UUID)
 
 
 def test_schemas_return_raise():
