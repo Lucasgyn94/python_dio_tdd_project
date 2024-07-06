@@ -6,6 +6,8 @@ from store.models.product import ProductModel
 from store.schemas.product import ProductIn, ProductOut, ProductUpdate, ProductUpdateOut
 from store.core.exceptions import NotFoundException
 import pymongo
+from bson import Decimal128
+from decimal import Decimal
 
 class ProductUseCase:
     def __init__(self) -> None:
@@ -30,13 +32,26 @@ class ProductUseCase:
     async def query(self) -> List[ProductOut]:
         return [ProductOut(**item) async for item in self.collection.find()]
     
+
     async def update(self, id: UUID, body: ProductUpdate) -> ProductUpdateOut:
+        update_data = body.model_dump(exclude_none=True)
+        for key, value in update_data.items():
+            if isinstance(value, Decimal):
+                update_data[key] = Decimal128(str(value))
+
         result = await self.collection.find_one_and_update(
             filter={"id": id},
-            update={"$set": body.model_dump(exclude_none=True)},
-            
-            return_document=pymongo.ReturnDocument.AFTER
+            update={"$set": update_data},
+            return_document=pymongo.ReturnDocument.AFTER,
         )
+
+        if not result:
+            raise NotFoundException(message=f"Product not found with filter: {id}")
+
+        # Converta Decimal128 de volta para Decimal
+        for key, value in result.items():
+            if isinstance(value, Decimal128):
+                result[key] = Decimal(str(value.to_decimal()))
 
         return ProductUpdateOut(**result)
     
