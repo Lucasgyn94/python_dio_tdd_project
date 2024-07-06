@@ -7,12 +7,12 @@ Desenvolvida com o poderoso framework FastAPI, ela oferece alta performance, doc
 
 ## Principais Características
 
-CRUD Completo: Crie, leia, atualize e exclua produtos com facilidade.
-Validação de Dados: Garanta a integridade dos seus dados com a validação automática fornecida pelo Pydantic.
-Documentação Interativa: Explore e teste os endpoints da API diretamente no seu navegador com o Swagger UI.
-Alta Performance: FastAPI e Uvicorn garantem que sua API seja rápida e responsiva.
-Testes Abrangentes: Mais de 90% de cobertura de testes garante a qualidade e a estabilidade da API.
-Fácil Implantação: Utilize Docker para implantar sua API rapidamente em qualquer ambiente.
+CRUD Completo: Crie, leia, atualize e exclua produtos com facilidade.<br>
+Validação de Dados: Garanta a integridade dos seus dados com a validação automática fornecida pelo Pydantic.<br>
+Documentação Interativa: Explore e teste os endpoints da API diretamente no seu navegador com o Swagger UI.<br>
+Alta Performance: FastAPI e Uvicorn garantem que sua API seja rápida e responsiva.<br>
+Testes Abrangentes: Mais de 90% de cobertura de testes garante a qualidade e a estabilidade da API.<br>
+Fácil Implantação: Utilize Docker para implantar sua API rapidamente em qualquer ambiente.<br>
 
 ## Endpoints Principais
 
